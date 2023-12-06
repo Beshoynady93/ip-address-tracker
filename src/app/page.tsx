@@ -1,4 +1,6 @@
+import { LatLngExpression } from 'leaflet';
 import dynamic from 'next/dynamic';
+import Header from './components/Header';
 
 const apiKey = 'at_i5h7K8tcdAwCZO7YVsfTloFhnzXcG';
 
@@ -13,9 +15,12 @@ export default async function Home() {
     .then((res) => res.json())
     .then((location) => location);
 
-  const position = [data.location.lat, data.location.lng];
+  const position: LatLngExpression = [data.location.lng, data.location.lat];
 
-  console.log(data);
-
-  return <main className="">{<Map position={position} zoom={13} />}</main>;
+  return (
+    <main className="">
+      <Header />
+      {<Map position={position} />}
+    </main>
+  );
 }
