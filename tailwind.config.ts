@@ -18,6 +18,9 @@ const config: Config = {
       screens: {
         small: '375px',
       },
+      height: {
+        'map-height': 'calc(100vh - 200px)',
+      },
     },
   },
   plugins: [],

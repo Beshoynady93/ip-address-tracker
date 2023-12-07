@@ -16,8 +16,8 @@ export default function Leaflet({ position }: LeafletProps) {
     <MapContainer
       center={position}
       zoom={15}
-      scrollWheelZoom={false}
-      className="h-96"
+      //   scrollWheelZoom={false}
+      className="h-map-height"
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

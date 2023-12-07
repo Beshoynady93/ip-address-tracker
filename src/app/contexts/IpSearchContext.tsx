@@ -1,10 +1,15 @@
 'use client';
 
 import { createContext, useContext, useState } from 'react';
+import { ApiResponse } from '../util/getLocation';
 
 type IpSearchContext = {
   searchInput: string | undefined;
   setSearchInput: React.Dispatch<React.SetStateAction<string | undefined>>;
+  searchDataResults: ApiResponse | undefined;
+  setSearchDataResults: React.Dispatch<
+    React.SetStateAction<ApiResponse | undefined>
+  >;
 };
 
 const IpSearchContext = createContext<IpSearchContext | null>(null);
@@ -16,9 +21,19 @@ type IpSearchContextProvider = {
 export const IpSearchContextProvider = ({
   children,
 }: IpSearchContextProvider) => {
-  const [searchInput, setSearchInput] = useState<string | undefined>();
+  const [searchInput, setSearchInput] = useState<string | undefined>('');
+  const [searchDataResults, setSearchDataResults] = useState<
+    ApiResponse | undefined
+  >();
   return (
-    <IpSearchContext.Provider value={{ searchInput, setSearchInput }}>
+    <IpSearchContext.Provider
+      value={{
+        searchInput,
+        setSearchInput,
+        searchDataResults,
+        setSearchDataResults,
+      }}
+    >
       {children}
     </IpSearchContext.Provider>
   );
