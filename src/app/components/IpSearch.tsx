@@ -5,14 +5,19 @@ import Image from 'next/image';
 import { getLocation } from '../util/getLocation';
 
 const IpSearch = () => {
-  const { searchInput, setSearchInput, setSearchDataResults } =
-    useIpSearchContext();
+  const {
+    searchInput,
+    setSearchInput,
+    setSearchDataResults,
+    setIsDisplayOpen,
+  } = useIpSearchContext();
 
   const submitSearchHandler = async () => {
-    // e.preventDefault();
+    if (!searchInput) return;
     const data = await getLocation(searchInput);
     setSearchDataResults(data);
     setSearchInput('');
+    setIsDisplayOpen(true);
   };
 
   return (

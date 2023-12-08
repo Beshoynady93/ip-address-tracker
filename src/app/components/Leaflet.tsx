@@ -1,17 +1,34 @@
 'use client';
-import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
+import {
+  MapContainer,
+  Marker,
+  Popup,
+  TileLayer,
+  useMapEvents,
+} from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-defaulticon-compatibility';
 import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css';
 import IconMarker from '../../../public/images/icon-location.svg';
-import { LatLngExpression } from 'leaflet';
+import { useIpSearchContext } from '../contexts/IpSearchContext';
 
-type LeafletProps = {
-  position: LatLngExpression;
-};
+export default function Leaflet() {
+  const { searchDataResults } = useIpSearchContext();
+  const map = useMapEvents({
+    click: () => {
+      map.locate();
+    },
+    locationfound: (location) => {
+      console.log('location found:', location);
+    },
+  });
+  if (!searchDataResults) return;
+  const position: L.LatLngExpression | undefined = [
+    searchDataResults.lng,
+    searchDataResults.lat,
+  ];
 
-export default function Leaflet({ position }: LeafletProps) {
   return (
     <MapContainer
       center={position}

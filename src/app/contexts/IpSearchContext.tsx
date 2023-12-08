@@ -10,6 +10,8 @@ type IpSearchContext = {
   setSearchDataResults: React.Dispatch<
     React.SetStateAction<ApiResponse | undefined>
   >;
+  isDisplayOpen: boolean;
+  setIsDisplayOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const IpSearchContext = createContext<IpSearchContext | null>(null);
@@ -25,6 +27,8 @@ export const IpSearchContextProvider = ({
   const [searchDataResults, setSearchDataResults] = useState<
     ApiResponse | undefined
   >();
+  const [isDisplayOpen, setIsDisplayOpen] = useState(true);
+
   return (
     <IpSearchContext.Provider
       value={{
@@ -32,6 +36,8 @@ export const IpSearchContextProvider = ({
         setSearchInput,
         searchDataResults,
         setSearchDataResults,
+        isDisplayOpen,
+        setIsDisplayOpen,
       }}
     >
       {children}
